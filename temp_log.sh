@@ -7,20 +7,19 @@
 #get temperature from rpi
 TEMP=$(vcgencmd measure_temp)
 
-#clean the output to be saved
-TEMP=$(echo $TEMP | grep -oP [0-9]{2}.[0-9])
+#clean the output to be saved no decimal
+TEMP=$(echo $TEMP | grep -oP [0-9]{2})
 
 #echo "$TEMP"
 
-if [ -f "/home/pi/temp_log.txt" ]
+if [ -f "/home/pi/script/temp_log.txt" ]
 then
-	echo $TEMP >> "/home/pi/temp_log.txt"
-	#echo "New temp saved"
+        echo "`date`;" $TEMP >> "/home/pi/script/temp_log.txt"
 else
-	touch /home/pi/textfiles/temp_log.txt
-	echo $TEMP > "/home/pi/temp_log.txt"
-	#echo "File temp_log.txt created and temp saved"
+        touch /home/pi/textfiles/temp_log.txt
+        echo "`date`;" $TEMP >> "/home/pi/script/temp_log.txt"
 fi
+
 
 
 
